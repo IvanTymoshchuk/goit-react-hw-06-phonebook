@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://vanTymoshchuk.github.io/goit-react-hw-06-phonebook/",
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.16.3",
