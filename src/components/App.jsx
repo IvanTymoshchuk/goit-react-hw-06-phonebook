@@ -15,6 +15,7 @@ function App() {
   const [contacts, setContacts] = useLocaleStorage('contacts', initialContacts);
   const [filter, setFilter] = useState('');
 
+
   const addContact = ({ name, number }) => {
     const normalizedName = name.toLowerCase();
     const isAdded = contacts.find(
