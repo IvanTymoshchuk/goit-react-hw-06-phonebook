@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const useLocaleStorage = (key, defaultValue) => {
   // записуємо у локал сторедж те що користувач вписує , якщо нічого не має то буде значення по дефолту
   const [contact, setState] = useState(() => {
-    return JSON.parse(localStorage.getItem(key) ?? (defaultValue));
+    return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
   });
 
   useEffect(() => {
@@ -11,6 +11,6 @@ const useLocaleStorage = (key, defaultValue) => {
     localStorage.setItem(key, JSON.stringify(contact));
   }, [key, contact]);
   return [contact, setState];
-}
+};
 
-export default useLocaleStorage;  
+export default useLocaleStorage;
