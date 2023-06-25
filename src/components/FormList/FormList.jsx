@@ -1,10 +1,36 @@
 import { useState } from 'react';
 import { UserAddOutlined } from '@ant-design/icons';
 import { Form, Label, Input, Button, Span } from './FormList.styled';
+import { toast } from 'react-toastify';
+import { notifyOptions } from '../notifyOptions/notifyOptions';
+import { useSelector, useDispatch } from 'react-redux';
+import { getVisibleContacts } from 'redux/selectors';
+import { addContact } from 'redux/contactsSlice';
 
-function FormList({ onSubmit }) {
+const FormList = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(getVisibleContacts);
+  const dispatch = useDispatch();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const normalizedName = name.toLowerCase();
+    const isAdded = contacts.find(
+      el => el.name.toLowerCase() === normalizedName
+    );
+
+    if (isAdded) {
+      toast.error(`${name}: is already in contacts`, notifyOptions);
+      return;
+    }
+
+    dispatch(addContact({ name, number }));
+    setName('');
+    setNumber('');
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -18,13 +44,6 @@ function FormList({ onSubmit }) {
       default:
         return;
     }
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    onSubmit({ name, number });
-    setName('');
-    setNumber('');
   };
 
   return (
@@ -61,6 +80,6 @@ function FormList({ onSubmit }) {
       </Button>
     </Form>
   );
-}
+};
 
 export default FormList;
