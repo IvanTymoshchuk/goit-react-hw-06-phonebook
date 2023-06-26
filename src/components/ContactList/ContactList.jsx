@@ -9,7 +9,6 @@ import { deleteContacts } from 'redux/contactsSlice';
 const ContactList = () => {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContacts());
 
   return (
     <ListWrap>
@@ -17,7 +16,7 @@ const ContactList = () => {
         <List key={id}>
           {name + ' : ' + number}
 
-          <Button type="button" onClick={handleDelete}>
+          <Button type="button" onClick={() => dispatch(deleteContacts(id))}>
             <UserDeleteOutlined />
           </Button>
         </List>

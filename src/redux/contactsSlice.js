@@ -17,7 +17,7 @@ const contactsSlice = createSlice({
   reducers: {
     addContact: {
       reducer(state, action) {
-        state.list.push(action.payload); // Додавання нового контакта
+         state.list = [...state.list, action.payload]; // Додавання нового контакта
       },
     },
     prepare: (name, number) => {
